@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-4">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'recycle:drop_points_list' %}">Drop Points</a></li>
+            <li class="breadcrumb-item active">{{ point.name }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-6">
+            {% if point.image %}
+                <img src="{{ point.image.url }}" class="img-fluid rounded" alt="{{ point.name }}">
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <h1 class="mb-3">{{ point.name }}</h1>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Location Details</h5>
+                    <p class="card-text">
+                        <i class="fas fa-map-marker-alt text-primary"></i> 
+                        {{ point.location }}
+                    </p>
+                    <p class="card-text">{{ point.description }}</p>
+                </div>
+            </div>
+            <a href="{% url 'recycle:donate_item' %}" class="btn btn-primary">Donate Items Here</a>
+        </div>
+    </div>
+
+    <!-- Recent Items at this Drop Point -->
+    {% if recent_items %}
+    <div class="mt-5">
+        <h2>Recently Recycled Items at This Location</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
+            {% for item in recent_items %}
+                <div class="col">
+                    <div class="card h-100">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}" style="height: 200px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name }}</h5>
+                            <p class="card-text">{{ item.description|truncatewords:20 }}</p>
+                            <small class="text-muted">Donated {{ item.created_at|timesince }} ago</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

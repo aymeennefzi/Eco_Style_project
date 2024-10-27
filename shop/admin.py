@@ -36,3 +36,4 @@ admin.site.register(ReviewRating)
 @admin.register(ProductGallery)
 class ProductGalleryAdmin(admin.ModelAdmin):
     list_filter = ['product']
+

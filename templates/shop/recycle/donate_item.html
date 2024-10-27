@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Donate{% endblock %}
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title mb-0">Donate Item for Recycling</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data" class="donation-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form.name }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.drop_point }}
+                            </div>
+                        </div>
+                        {{ form.description }}
+                        {{ form.image }}
+                        
+                        <div class="alert alert-info">
+                            <h5><i class="fas fa-info-circle"></i> Guidelines for Donation</h5>
+                            <ul class="mb-0">
+                                <li>Ensure items are clean and in recyclable condition</li>
+                                <li>Add clear photos showing the item's condition</li>
+                                <li>Provide accurate description of the item</li>
+                                <li>Select the most convenient drop point location</li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary">Submit Donation</button>
+                            <a href="{% url 'recycle:my_recycled_items' %}" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h3 class="card-title mb-0">Why Recycle?</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <i class="fas fa-leaf text-success"></i>
+                            <strong>Environmental Impact</strong><br>
+                            Help reduce waste and protect our planet
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-recycle text-success"></i>
+                            <strong>Resource Conservation</strong><br>
+                            Save energy and natural resources
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-hand-holding-heart text-success"></i>
+                            <strong>Community Support</strong><br>
+                            Help others while reducing waste
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_css %}
+<style>
+    .donation-form label {
+        font-weight: 500;
+    }
+    .donation-form .alert ul {
+        padding-left: 20px;
+    }
+</style>
+{% endblock %}
+{% endblock %}

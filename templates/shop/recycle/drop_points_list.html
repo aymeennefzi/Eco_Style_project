@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Drop points{% endblock %}
+{% block content %}
+<div class="container py-4">
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for point in drop_points %}
+            <div class="col">
+                <div class="card h-100">
+                    {% if point.image %}
+                        <img src="{{ point.image.url }}" class="card-img-top" alt="{{ point.name }}" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ point.name }}</h5>
+                        <p class="card-text">
+                            <i class="fas fa-map-marker-alt text-primary"></i> 
+                            {{ point.location }}
+                        </p>
+                        <p class="card-text">{{ point.description|truncatewords:30 }}</p>
+                        <a href="{{ point.get_drop_point_details_url }}" class="btn btn-outline-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info">No drop points available at the moment.</div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if drop_points.paginator.num_pages > 1 %}
+    <div class="pagination justify-content-center mt-4">
+        <ul class="pagination">
+            {% if drop_points.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ drop_points.previous_page_number }}">&laquo;</a>
+                </li>
+            {% endif %}
+
+            {% for i in drop_points.paginator.page_range %}
+                {% if drop_points.number == i %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ i }}</span>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if drop_points.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ drop_points.next_page_number }}">&raquo;</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

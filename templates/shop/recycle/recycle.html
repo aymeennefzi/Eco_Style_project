@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Recycle{% endblock %}
+{% block content %}
+<div class="container py-4">
+    <div class="jumbotron text-center mb-4">
+        <h1>Recycle for a Better Future</h1>
+        <p class="lead">Join our community in making the world a cleaner place</p>
+        <div class="mt-4">
+            <a href="{% url 'recycle:donate_item' %}" class="btn btn-primary btn-lg mx-2">Donate Items</a>
+            <a href="{% url 'recycle:drop_points_list' %}" class="btn btn-outline-primary btn-lg mx-2">Find Drop Points</a>
+        </div>
+    </div>
+
+
+    <!-- Recent Items Section -->
+    <h2 class="mb-4">Recently Recycled Items</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+       
+        {% for item in recent_items %}
+            <div class="col">
+                <div class="card h-50">
+                    {% if item.image %}
+                        <img style="width: 100px; height: 100px;" src="{{ item.image.url }}" class="card-img-top "  alt="{{ item.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <p class="card-text">{{ item.description|truncatewords:20 }}</p>
+                        <small class="text-muted">Donated {{ item.created_at|timesince }} ago</small>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info">No recent items available.</div>
+            </div>
+            {% endfor %}
+    </div>
+
+    <!-- Featured Drop Points -->
+    <h2 class="mb-4">Featured Drop Points</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for point in featured_points %}
+            <div class="col">
+                <div class="card h-50">
+                    {% if point.image %}
+                        <img style="width: 100px; height: 100px;" src="{{ point.image.url }}" class="card-img-top" alt="{{ point.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ point.name }}</h5>
+                        <p class="card-text">{{ point.location }}</p>
+                        <a href="{{ point.get_drop_point_details_url }}" class="btn btn-outline-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
