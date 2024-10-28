@@ -2,62 +2,245 @@
 {% load static %}
 {% block title %}Drop points{% endblock %}
 {% block content %}
-<div class="container py-4">
-
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+<div class="container py-5">
+    <div class="row row-cols-1 row-cols-md-3 g-4 drop-points-container">
         {% for point in drop_points %}
             <div class="col">
-                <div class="card h-100">
+                <div class="drop-point-card">
                     {% if point.image %}
-                        <img src="{{ point.image.url }}" class="card-img-top" alt="{{ point.name }}" style="height: 200px; object-fit: cover;">
+                        <div class="card-image-wrapper">
+                            <img src="{{ point.image.url }}" alt="{{ point.name }}">
+                        </div>
                     {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ point.name }}</h5>
-                        <p class="card-text">
-                            <i class="fas fa-map-marker-alt text-primary"></i> 
-                            {{ point.location }}
-                        </p>
-                        <p class="card-text">{{ point.description|truncatewords:30 }}</p>
-                        <a href="{{ point.get_drop_point_details_url }}" class="btn btn-outline-primary">View Details</a>
+                    <div class="card-content">
+                        <h5 class="location-name">{{ point.name }}</h5>
+                        <div class="location-address">
+                            <i class="fas fa-map-marker-alt"></i> 
+                            <span>{{ point.location }}</span>
+                        </div>
+                        <p class="location-description">{{ point.description|truncatewords:30 }}</p>
+                        <a href="{{ point.get_drop_point_details_url }}" class="details-btn">
+                            View Details
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         {% empty %}
             <div class="col-12">
-                <div class="alert alert-info">No drop points available at the moment.</div>
+                <div class="empty-state">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <p>No drop points available at the moment.</p>
+                </div>
             </div>
         {% endfor %}
     </div>
 
-    <!-- Pagination -->
     {% if drop_points.paginator.num_pages > 1 %}
-    <div class="pagination justify-content-center mt-4">
-        <ul class="pagination">
+    <div class="custom-pagination">
+        <div class="pagination-container">
             {% if drop_points.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ drop_points.previous_page_number }}">&laquo;</a>
-                </li>
+                <a href="?page={{ drop_points.previous_page_number }}" class="pagination-arrow">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
             {% endif %}
 
-            {% for i in drop_points.paginator.page_range %}
-                {% if drop_points.number == i %}
-                    <li class="page-item active">
-                        <span class="page-link">{{ i }}</span>
-                    </li>
-                {% else %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-                    </li>
-                {% endif %}
-            {% endfor %}
+            <div class="pagination-numbers">
+                {% for i in drop_points.paginator.page_range %}
+                    {% if drop_points.number == i %}
+                        <span class="page-number active">{{ i }}</span>
+                    {% else %}
+                        <a href="?page={{ i }}" class="page-number">{{ i }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
 
             {% if drop_points.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ drop_points.next_page_number }}">&raquo;</a>
-                </li>
+                <a href="?page={{ drop_points.next_page_number }}" class="pagination-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
             {% endif %}
-        </ul>
+        </div>
     </div>
     {% endif %}
 </div>
+
+<style>
+    .drop-points-container {
+        margin-bottom: 3rem;
+    }
+
+    .drop-point-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .drop-point-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-image-wrapper {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .card-image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .drop-point-card:hover .card-image-wrapper img {
+        transform: scale(1.05);
+    }
+
+    .card-content {
+        padding: 1.5rem;
+    }
+
+    .location-name {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+
+    .location-address {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        color: #34495e;
+    }
+
+    .location-address i {
+        color: #3498db;
+    }
+
+    .location-description {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .details-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        width: fit-content;
+    }
+
+    .details-btn:hover {
+        background: linear-gradient(135deg, #2980b9, #2472a4);
+        color: white;
+        transform: translateX(5px);
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 3rem;
+        background: #f8f9fa;
+        border-radius: 12px;
+        color: #6c757d;
+    }
+
+    .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #3498db;
+    }
+
+    .custom-pagination {
+        margin-top: 3rem;
+    }
+
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .pagination-numbers {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .page-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background: white;
+        color: #2c3e50;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .page-number.active {
+        background: #3498db;
+        color: white;
+    }
+
+    .page-number:hover:not(.active) {
+        background: #f8f9fa;
+        transform: translateY(-2px);
+    }
+
+    .pagination-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background: white;
+        color: #2c3e50;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .pagination-arrow:hover {
+        background: #f8f9fa;
+        transform: translateY(-2px);
+        color: #3498db;
+    }
+
+    @media (max-width: 768px) {
+        .drop-point-card {
+            margin-bottom: 1rem;
+        }
+
+        .card-content {
+            padding: 1rem;
+        }
+
+        .pagination-numbers {
+            gap: 0.25rem;
+        }
+
+        .page-number, .pagination-arrow {
+            width: 35px;
+            height: 35px;
+        }
+    }
+</style>
 {% endblock %}

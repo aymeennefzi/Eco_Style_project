@@ -1,67 +1,366 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container py-4">
-    <nav aria-label="breadcrumb" class="mb-4">
+<style>
+    /* General Styles */
+    .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    /* Breadcrumb Styles */
+    .breadcrumb-nav {
+        padding: 1rem 0;
+        margin-bottom: 2rem;
+    }
+
+    .breadcrumb {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .breadcrumb-item a {
+        color: #2563eb;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .breadcrumb-item a:hover {
+        color: #1d4ed8;
+    }
+
+    .breadcrumb-item.active {
+        color: #4b5563;
+    }
+
+    .breadcrumb-divider {
+        color: #9ca3af;
+    }
+
+    /* Main Content Grid */
+    .content-wrapper {
+        display: grid;
+        grid-template-columns: minmax(300px, 2fr) 3fr;
+        gap: 2.5rem;
+        margin-bottom: 3rem;
+    }
+
+    /* Image Styles */
+    .image-container {
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        height: fit-content;
+        background: #f3f4f6;
+    }
+
+    .location-image {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .image-container:hover .location-image {
+        transform: scale(1.02);
+    }
+
+    /* Details Section */
+    .details-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .location-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .location-card {
+        background: white;
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        transition: transform 0.2s ease;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .info-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .location-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        color: white;
+        border-radius: 12px;
+        flex-shrink: 0;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+    }
+
+    .location-text {
+        color: #4b5563;
+        line-height: 1.8;
+        font-size: 1.1rem;
+    }
+
+    .section-divider {
+        height: 1px;
+        background: #e5e7eb;
+        margin: 1.5rem 0;
+        border: none;
+    }
+
+    /* Donate Button */
+    .donate-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        background: linear-gradient(135deg, #2563eb 0%, #2D2F71 100%);
+        color: white;
+        padding: 1.25rem 2rem;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        width: 100%;
+    }
+
+    .donate-btn:hover {
+        background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        color: white;
+    }
+
+    /* Recent Items Section */
+    .recent-items-section {
+        margin-top: 4rem;
+        padding-top: 2rem;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .recent-items-title {
+        font-size: 1.875rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .items-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 1rem;
+    }
+
+    .item-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+    .item-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .item-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .item-content {
+        padding: 1.5rem;
+    }
+
+    .item-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.75rem;
+    }
+
+    .item-description {
+        color: #4b5563;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .item-date {
+        color: #6b7280;
+        font-size: 0.875rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .no-items {
+        text-align: center;
+        padding: 3rem;
+        background: #f9fafb;
+        border-radius: 12px;
+        color: #6b7280;
+        grid-column: 1 / -1;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .content-wrapper {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .location-image {
+            height: 400px;
+        }
+
+        .items-grid {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+    }
+
+    @media (max-width: 640px) {
+        .container {
+            padding: 1rem;
+        }
+
+        .location-title {
+            font-size: 2rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .location-image {
+            height: 300px;
+        }
+
+        .recent-items-title {
+            font-size: 1.5rem;
+        }
+
+        .items-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+    }
+</style>
+
+<div class="container">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'recycle:drop_points_list' %}">Drop Points</a></li>
+            <li class="breadcrumb-item">
+                <a href="{% url 'recycle:drop_points_list' %}">
+                    <i class="fas fa-arrow-left"></i>
+                    Drop Points
+                </a>
+            </li>
+            <span class="breadcrumb-divider">/</span>
             <li class="breadcrumb-item active">{{ point.name }}</li>
         </ol>
     </nav>
 
-    <div class="row">
-        <div class="col-md-6">
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <div class="image-container">
             {% if point.image %}
-                <img src="{{ point.image.url }}" class="product-img " style="width:350px; height:350px;;border-radius:15px 15px 0 0;" alt="{{ point.name }}">
+                <img src="{{ point.image.url }}" class="location-image" alt="{{ point.name }}">
             {% endif %}
         </div>
-        <div class="col-md-6">
-            <h1 class="mb-3">{{ point.name }}</h1>
-            <div class="card mb-4">
+
+        <div class="details-section">
+            <h1 class="location-title">{{ point.name }}</h1>
+            
+            <div class="location-card">
                 <div class="card-body">
-                    <h5 class="card-title">Location Details</h5>
-                    <p class="card-text">
-                        <i class="fas fa-map-marker-alt text-primary"></i> 
-                        {{ point.location }}
-                    </p>
-                    <p class="card-text">{{ point.description }}</p>
+                    <div class="info-header">
+                        <div class="location-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h5 class="section-title">Location Details</h5>
+                            <p class="location-text">{{ point.location }}</p>
+                        </div>
+                    </div>
+
+                    <hr class="section-divider">
+
+                    <div class="description-section">
+                        <h5 class="section-title">About This Location</h5>
+                        <p class="location-text">{{ point.description }}</p>
+                    </div>
                 </div>
             </div>
-            <a href="{% url 'recycle:donate_item' %}" class="btn btn-primary">Donate Items Here</a>
+
+            <a href="{% url 'recycle:donate_item' %}" class="donate-btn" >
+                <i class="fas fa-recycle"></i>
+                <span>Donate Items Here</span>
+            </a>
         </div>
     </div>
 
-    <!-- Recent Items at this Drop Point -->
+    <!-- Recent Items Section -->
     {% if recent_items %}
-    <div class="m-5">
-        <h2>Recently Recycled Items at This Location</h2>
-        <div class="row ">
-            <div class="tab-content grid-content m-6">
-                <div class="tab-pane fade in active text-center" id="grid">
+    <section class="recent-items-section">
+        <h2 class="recent-items-title">Recently Recycled Items</h2>
+        <div class="items-grid">
             {% for item in recent_items %}
-            <div  class="col-xs-12 col-sm-6 col-md-4">
-                <div   style="background:#ffffff; ;border-radius:15px;" class="single-product">
-                    <div class="card h-50">
-                        {% if item.image %}
-                            <img  src="{{ item.image.url }}" class="product-img " style="width:100%; height:350px;;border-radius:15px 15px 0 0;" alt="{{ item.name }}">
-                        {% endif %}
-                        <div class="card-body">
-                            <h5 class="card-title">{{ item.name }}</h5>
-                            <p class="card-text">{{ item.description|truncatewords:20 }}</p>
-                            <small class="text-muted">Donated {{ item.created_at|timesince }} ago</small>
-                        </div>
+            <article class="item-card">
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" class="item-image" alt="{{ item.name }}">
+                {% endif %}
+                <div class="item-content">
+                    <h3 class="item-title">{{ item.name }}</h3>
+                    <p class="item-description">{{ item.description|truncatewords:20 }}</p>
+                    <div class="item-date">
+                        <i class="fas fa-clock"></i>
+                        <span>Donated {{ item.created_at|timesince }} ago</span>
                     </div>
                 </div>
-                </div>
-            {% empty %}
-                <div class="col-12">
-                    <div class="alert alert-info">No recent items available.</div>
-                </div>
-                {% endfor %}
+            </article>
+            {% endfor %}
         </div>
-    </div>
-    </div>
-    </div>
+    </section>
     {% endif %}
 </div>
 {% endblock %}
