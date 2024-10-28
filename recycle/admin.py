@@ -4,6 +4,8 @@ import admin_thumbnails
 from .services.classifier import ClothingClassifier
 from django.contrib import messages
 from django.http import HttpResponse
+import matplotlib
+matplotlib.use('Agg')
 
 @admin.register(DropPoint)
 class DropPointAdmin(admin.ModelAdmin):

@@ -7,6 +7,9 @@ import cv2
 from PIL import Image
 import logging
 from django.contrib import messages
+import matplotlib
+matplotlib.use('Agg')
+
 import matplotlib.pyplot as plt
 import io
 import base64
