@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from .recommender2 import recommend  # Assurez-vous d'importer la fonction
+from django.http import JsonResponse
 
 from .models import Product, Category
 from cart.views import _cart_id
@@ -19,6 +21,9 @@ def home(request):
     }
     return render(request, 'shop/index.html', context)
 
+def test_recommendation_view(request):
+    results = recommend()  # Appel de la fonction de recommandation
+    return JsonResponse(results)  # Renvoie les résultats en JSON
 
 def shop(request, category_slug=None):
     categories = None

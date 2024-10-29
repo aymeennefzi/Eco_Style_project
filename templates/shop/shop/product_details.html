@@ -209,19 +209,19 @@
 															{% if user.is_authenticated %}
 
 
-															{% if orderproduct %}
-															<!--<input style="width:20%;float:right;margin-button:20px" type="submit" value="Post Review" class="btn btn-warning">-->
-															<button type="submit" class="btn btn-warning"
-																style="background:#2D2F71;color:#1c1427; font-size:18px;float: right;"><b>submit
-																	review </b></button>
+															<!-- {% if orderproduct %}
+															
+															
 															{% else %}
 															<div style="font-size:18px;margin-top:10px;width: 75%;"
 																class="container alert alert-info text-center"
 																role="alert">
 																You must buy this product to review on it!
 															</div>
-															{% endif %}
-
+															{% endif %} -->
+															<button type="submit" class="btn btn-warning"
+																style="background:#2D2F71;color:#ffffff; font-size:18px;float: right;"><b>submit
+																	review </b></button>
 															{% else %}
 															<div style="font-size:18px;margin-top:10px;width: 75%;"
 																class="container alert alert-info text-center"
@@ -245,7 +245,7 @@
 										<h3 class="text-center" style="color:#2D2F71">Customer rating</h3><br>
 										{% if reviews %}
 										{% for review in reviews %}
-										<div style="background:#1C1427; padding:20px; border-radius:15px" class="autohr-text ">
+										<div style="background:#ececec; padding:20px; border-radius:15px" class="autohr-text ">
 											<img style="width:50px; height:50px; border-radius:50%" src="{{review.user.userprofile.profile_picture.url}}" class="img-xs icon rounded-circle">
 											
 											<div class="author-des">

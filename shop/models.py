@@ -32,7 +32,7 @@ class Product(models.Model):
     stock = models.IntegerField()
     new = models.BooleanField(default=False)
     is_available = models.BooleanField(default=True)
-
+    
     date_joined_for_format = models.DateTimeField(auto_now_add=True)
     last_login_for_format = models.DateTimeField(auto_now=True)
     def created(self):
@@ -64,7 +64,6 @@ class Product(models.Model):
         verbose_name_plural = 'Products'
         ordering = ('-date_joined_for_format',)
     
-
 
 class VariationManager(models.Manager):
     def colors(self):
