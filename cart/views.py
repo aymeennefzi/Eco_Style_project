@@ -187,3 +187,4 @@ def cart(request, total_price=0, quantity=0, cart_items=None):
 
     return render(request, 'shop/cart/cart.html', context)
 
+#####################views########""""
