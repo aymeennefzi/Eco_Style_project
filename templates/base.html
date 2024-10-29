@@ -5,102 +5,83 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}E - S H O P{% endblock title %}</title>
+    <title>{% block title %}E - C O S T Y L E{% endblock title %}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/logo.jpg' %}">
+    <link rel="apple-touch-icon" href="{% static 'apple-touch-icon.png' %}">
 
-    <link rel="apple-touch-icon" href="apple-touch-icon.png' %}">
-    <!-- Place favicon.ico in the root directory -->
-    <!-- google fonts -->
-    <!-- CSS only -->
-    
+    <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Lato:400,900,700,300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-    <!-- all css here -->
-    <!-- bootstrap v3.3.6 css -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <!-- animate css -->
-    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
-    <!-- pe-icon-7-stroke -->
-    <link rel="stylesheet" href="{% static 'css/materialdesignicons.min.css' %}">
-    <!-- pe-icon-7-stroke -->
-    <link rel="stylesheet" href="{% static 'css/jquery.simpleLens.css' %}">
-    <!-- jquery-ui.min css -->
-    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
-    <!-- meanmenu css -->
-    <link rel="stylesheet" href="{% static 'css/meanmenu.min.css' %}">
-    <!-- nivo.slider css -->
-    <link rel="stylesheet" href="{% static 'css/nivo-slider.css' %}">
-    <!-- owl.carousel css -->
-    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
-    <!-- style css -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <!-- responsive css -->
-    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-    <!-- modernizr js -->
-
-
     
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.simpleLens.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/meanmenu.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nivo-slider.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
     <style> 
         #searchh input[type=text] {
-        width: 150px;
-        margin-top:10px;
-        margin-bottom:10px;
-        box-sizing: border-box;
-        border: 2px solid #f4cca4;
-        border-radius: 4px;
-        font-size: 16px;
-        color:#1c1427;
-        background-color: #fff;
-        background-position: 10px 10px; 
-        background-repeat: no-repeat;
-        padding: 12px 20px 12px 40px;
-        -webkit-transition: width 0.4s ease-in-out;
-        transition: width 0.4s ease-in-out;
+            width: 150px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 2px solid #a5d6a7; /* Updated border color */
+            border-radius: 4px;
+            font-size: 16px;
+            color: #1c1427;
+            background-color: #fff;
+            background-position: 10px 10px; 
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+            transition: width 0.4s ease-in-out;
         }
 
         #searchh input[type=text]:focus {
-        width: 80%;
+            width: 80%;
         }
     </style>
 
-    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="{% static 'js/vendor/modernizr-2.8.3.min.js' %}"></script>
-
     <script src="https://www.paypal.com/sdk/js?client-id=ATDakGEFESlSq0xbOzxw0W-dZUWrKfiedaKAFHEk0QKfsUeeR_9j6G1A78TUmvFJuMvz3ArZroEobPHY&currency=USD"></script>
-    
 </head>
 
 <body style="background:#ffffff">
 
-    <!-- header section start -->
-    <header style="background:#2D2F71" class="header-one header-two">
-        <div style="background:#2D2F71" class="header-top-two">
+    <!-- Header Section Start -->
+    <header style="background:#4CAF50" class="header-one header-two"> <!-- Updated header color -->
+        <div style="background:#4CAF50" class="header-top-two"> <!-- Updated header-top color -->
             <div class="container text-center">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="middel-top">
                             {% if user.id is None %}
                             <div class="left floatleft">
-                                <p style="color:#f4cca4"><b>Welcome Guest!</b></p>
+                                <p style="color:#ffffff"><b>Welcome Guest!</b></p> <!-- Updated text color -->
                             </div>
                             {% else %}
                             <div class="left floatleft">
-                                <p style="color:#f4cca4"><b>Welcome {{user.first_name | capfirst}}!</b></p>
+                                <p style="color:#ffffff"><b>Welcome {{user.first_name | capfirst}}!</b></p> <!-- Updated text color -->
                             </div>
                             {% endif %}
                         </div>
                         <div class="middel-top clearfix">
                             <ul class="clearfix right floatright">
                                 <li>
-                                    <a style="color:#f4cca4" href="#"><i class="mdi mdi-account"></i></a>
+                                    <a style="color:#ffffff" href="#"><i class="mdi mdi-account"></i></a>
                                     {% if user.id is None %}
                                     <ul style="background:#1c1427">
                                         <li><a href="{% url 'accounts:login' %}">Login</a></li>
-                                        <li><a href="{% url 'accounts:register' %}">Registar</a></li>
+                                        <li><a href="{% url 'accounts:register' %}">Register</a></li>
                                     </ul>
                                     {% else %}
                                     <ul style="background:#1c1427">
@@ -110,7 +91,7 @@
                                     {% endif %}
                                 </li>
                                 <li>
-                                    <a style="color:#f4cca4" href="#"><i class="mdi mdi-settings"></i></a>
+                                    <a style="color:#ffffff" href="#"><i class="mdi mdi-settings"></i></a>
                                     <ul style="background:#1c1427">
                                         <li><a href="my-account.html">My account</a></li>
                                         <li><a href="cart.html">My cart</a></li>
@@ -118,22 +99,7 @@
                                         <li><a href="checkout.html">Check out</a></li>
                                     </ul>
                                 </li>
-                                {% if user.id is None %}
-                                {% else %}
-                                <li><a href="{% url 'shop:wishlist_view' %}"><i class="fa fa-star"></i></a></li>                                </ul>
-                                {% endif %}
                             </ul>
-
-
-                            <!--
-                            <div class="right floatright">
-                               
-                                     <form action="{% url 'shop:search' %}" method="GET" >
-                                    <button style="color:#d99879" type="submit"><i class="mdi mdi-magnify"></i></button>
-                                    <input type="text" placeholder="Search..." name="keyword"/>
-                                    </form>
-                            -->
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -144,10 +110,10 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <form id="searchh" action={% url 'shop:search' %} method="GET">
-                        <input  type="text" name="keyword" placeholder="Search...">
-                        <button style="height:49px; margin-bottom:6px; background:#f4cca4;margin-left:-1px;border:None "  class="btn btn-warning" type="submit">
-                           <i style="color:#d99879" class="fa fa-search"></i>
-                        </button>
+                            <input type="text" name="keyword" placeholder="Search...">
+                            <button style="height:49px; margin-bottom:6px; background:#a5d6a7; margin-left:-1px; border:None" class="btn btn-warning" type="submit">
+                                <i style="color:#d99879" class="fa fa-search"></i>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -157,16 +123,15 @@
             <div class="row">
                 <div class="col-sm-2">
                     <div class="logo">
-                        <a style="color:#f4cca4;font-weight: 800;" href="\"><span
-                                style="color:#d99879">Comfort</span>i</a>
+                        <a style="color:#ffffff; font-weight: 800;" href="/"><span style="color:#d99879">Ecostyle</span></a> <!-- Updated name -->
                     </div>
                 </div>
                 <div class="col-sm-8">
                     <div class="header-middel">
                         <div class="mainmenu">
-                            <nav >
+                            <nav>
                                 <ul>
-                                    <li ><a href="\">Home</a></li>
+                                    <li><a href="/">Home</a></li>
                                     <li><a href="{% url 'shop:shop' %}">Shop</a></li>
                                     <li><a href="#">Category <i class="mdi mdi-arrow-down"></i></a>
                                         <ul class="dropdown">
@@ -176,18 +141,18 @@
                                             {% endfor %}
                                         </ul>
                                     </li>
-                                    <li ><a href="{% url 'recycle:recycle' %}">Recycle</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
                                     <li><a href="about.html">About</a></li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
                             </nav>
                         </div>
-                        <!-- mobile menu start -->
+                        <!-- Mobile Menu Start -->
                         <div class="mobile-menu-area">
                             <div class="mobile-menu">
-                                <nav  id="dropdown">
-                                    <ul  >
-                                        <li><a style="color:#1c1427" href="\">Home</a></li>
+                                <nav id="dropdown">
+                                    <ul>
+                                        <li><a style="color:#1c1427" href="/">Home</a></li>
                                         <li><a style="color:#1c1427" href="{% url 'shop:shop' %}">Shop</a></li>
                                         <li><a style="color:#1c1427" href="{% url 'shop:shop' %}">Category</a>
                                             <ul class="dropdown">
@@ -197,7 +162,7 @@
                                                 {% endfor %}
                                             </ul>
                                         </li>
-                                        <li><a style="color:#1c1427" href="{% url 'recycle:recycle' %}">Recycle</a></li>
+                                        <li><a style="color:#1c1427" href="blog.html">Blog</a></li>
                                         <li><a style="color:#1c1427" href="about.html">About</a></li>
                                         <li><a style="color:#1c1427" href="contact.html">Contact</a></li>
                                     </ul>
@@ -209,7 +174,6 @@
                 <div class="col-sm-2">
                     <div class="cart-itmes">
                         <a class="cart-itme-a" href="{% url 'cart:cart' %}">
-
                             <i class="mdi mdi-cart"></i>
                             {{quantityyy}} items : <strong>${{totalll}}</strong>
                         </a>
@@ -233,11 +197,9 @@
                                     <strong>${{x.sub_total}}</strong>
                                 </div>
                             </div>
-                            
                             {% endfor %}
-                            
                             <div class="total">
-                                <span>total <strong>= ${{totalll}}</strong></span>
+                                <span>Total <strong>= ${{totalll}}</strong></span>
                             </div><br>
                             {% if '/cart/' not in request.path %}
                             <a style="background:#40394a;color:#f4cca4" class="out-menu" href="{% url 'cart:cart' %}">Go To Cart</a>
@@ -251,17 +213,14 @@
     <br>
     <!--===================== Content ====================-->
     {% block content %}
-
     {% endblock content %}
 
-
     <footer>
-        <div  style="background:#2D2F71" class="footer-bottom">
+        <div style="background:#4CAF50" class="footer-bottom"> <!-- Updated footer color -->
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
-                        <p style="color:#f5f5f5">
-                            All Rights Reserved 2024</p>
+                        <p style="color:#f5f5f5">All Rights Reserved 2024</p>
                     </div>
                     <div class="col-xs-12 col-sm-6 text-right">
                         <a href="#"><img src="{% static 'img/footer/payment.png' %}" alt="" /></a>
@@ -269,32 +228,20 @@
                 </div>
             </div>
         </div>
-        <!-- footer-bottom area end -->
     </footer>
-    <!-- footer section end -->
+    <!-- Footer Section End -->
 
-    <!-- all js here -->
-    <!-- jquery latest version -->
+    <!-- All JS Here -->
     <script src="{% static 'js/vendor/jquery-1.12.3.min.js' %}"></script>
-    <!-- bootstrap js -->
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <!-- owl.carousel js -->
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-    <!-- meanmenu js -->
     <script src="{% static 'js/jquery.meanmenu.js' %}"></script>
-    <!-- countdown JS -->
     <script src="{% static 'js/countdown.js' %}"></script>
-    <!-- nivo.slider JS -->
     <script src="{% static 'js/jquery.nivo.slider.pack.js' %}"></script>
-    <!-- simpleLens JS -->
     <script src="{% static 'js/jquery.simpleLens.min.js' %}"></script>
-    <!-- jquery-ui js -->
     <script src="{% static 'js/jquery-ui.min.js' %}"></script>
-    <!-- load-more js -->
     <script src="{% static 'js/load-more.js' %}"></script>
-    <!-- plugins js -->
     <script src="{% static 'js/plugins.js' %}"></script>
-    <!-- main js -->
     <script src="{% static 'js/main.js' %}"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -304,8 +251,8 @@
                 e.preventDefault();
                 $('.mainImage img').attr('src', $(this).attr("href"));
                 $('.mainImage a').attr('data-lens-image', $(this).attr("data-lens-image"));
-            })
-        })
+            });
+        });
     </script>
 </body>
 
