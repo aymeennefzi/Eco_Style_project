@@ -4,7 +4,7 @@ from scipy.sparse.linalg import svds
 from sklearn.metrics import mean_squared_error
 import math
 
-# Extraire les Données de ShopReviewRatingg
+# Extraire les Données de ShopReviewRating
 def get_user_item_matrix():
     ratings = ReviewRating.objects.all()
     users = ratings.values_list('user_id', flat=True).distinct()
