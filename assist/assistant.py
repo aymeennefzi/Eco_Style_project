@@ -4,6 +4,8 @@ import winsound
 from pydub import AudioSegment
 import pyautogui
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+
 
 def listen_for_command():
     recognizer = sr.Recognizer()
@@ -35,6 +37,17 @@ def respond(response_text):
 tasks = []
 listeningToTask = False
 
+
+def check_for_404(driver):
+    try:
+        # Check for a specific element or text indicating a 404 page
+        driver.find_element_by_xpath("//*[contains(text(), '404')]")
+        respond("Page not found. Redirecting to shop.")
+        driver.get("http://127.0.0.1:8000/shop")
+        return True
+    except NoSuchElementException:
+        return False
+
 def main():
     global tasks
     global listeningToTask
@@ -57,10 +70,6 @@ def main():
                 listeningToTask = True
                 respond("Im fine, Im here to to redirect you anywhere you want")
             
-            elif "list tasks" in command:
-                respond("Sure. Your tasks are:")
-                for task in tasks:
-                    respond(task)
             elif "take a screenshot" in command:
                 pyautogui.screenshot("screenshot.png")
                 respond("I took a screenshot for you.")
@@ -73,6 +82,35 @@ def main():
             elif "home" in command:
                 respond("Redirecting to Home.")
                 driver.get("http://127.0.0.1:8000")
+
+            elif "first item" in command or "number one" in command:
+                respond("Adding first item to cart.")
+                driver.get("http://127.0.0.1:8000/cart/add_cart/1/")
+
+            elif "second item" in command or "number two" in command:
+                respond("Adding second item to cart.")
+                driver.get("http://127.0.0.1:8000/cart/add_cart/2/")
+
+            elif "third item" in command or "number three" in command:
+                respond("Adding third item to cart.")
+                driver.get("http://127.0.0.1:8000/cart/add_cart/3/")
+
+            elif "fourth item" in command or "number four" in command:
+                respond("Adding fourth item to cart.")
+                driver.get("http://127.0.0.1:8000/cart/add_cart/4/")
+
+            elif "fifth item" in command or "number five" in command:
+                respond("Adding fifth item to cart.")
+                driver.get("http://127.0.0.1:8000/cart/add_cart/5/")
+
+            elif "sixth item" in command or "number six" in command:
+                respond("Adding sixth item to cart.")
+                driver.get("http://127.0.0.1:8000/cart/add_cart/6/")
+            
+            elif "check out" in command :
+                respond("Going to checkout")
+                driver.get("http://127.0.0.1:8000/orders/checkout")
+
             elif "previous page" in command:
                 respond("Going back to the previous page.")
                 driver.back()
