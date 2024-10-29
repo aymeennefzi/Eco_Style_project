@@ -118,7 +118,13 @@
                                         <li><a href="checkout.html">Check out</a></li>
                                     </ul>
                                 </li>
+                                {% if user.id is None %}
+                                {% else %}
+                                <li><a href="{% url 'shop:wishlist_view' %}"><i class="fa fa-star"></i></a></li>                                </ul>
+                                {% endif %}
                             </ul>
+
+
                             <!--
                             <div class="right floatright">
                                

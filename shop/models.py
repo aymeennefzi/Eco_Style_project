@@ -122,3 +122,44 @@ class ProductGallery(models.Model):
 
     def __str__(self):
         return self.product.name
+
+
+
+
+
+
+#AZIZ
+class Wishlist(models.Model):
+    user = models.OneToOneField(Account, on_delete=models.CASCADE, related_name='wishlist')
+    
+    def __str__(self):
+        return f"{self.user.username}'s Wishlist"
+    
+
+
+class WishlistItem(models.Model):
+    from shop.models import Product
+    wishlist = models.ForeignKey(Wishlist, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    added_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.product.name} in {self.wishlist.user.username}'s Wishlist"
+
+
+
+
+class Notification(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='notifications')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="notifications")
+    created_at = models.DateTimeField(auto_now_add=True)
+    target_price = models.DecimalField(max_digits=6, decimal_places=2)
+    is_read = models.BooleanField(default=False)
+    message = models.CharField(max_length=255)
+    notify_on_sale = models.BooleanField(default=False) 
+
+    def __str__(self):
+        return f"Notification for {self.user.username} - {self.product.name}"
+
+
+

@@ -4,22 +4,22 @@
 {% block content %}
 
 <div class="pages-title section-padding">
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="pages-title-text text-center">
-					<h2 style="color:#2D2F71">{{single_product.name}}</h2>
-					<ul class="text-left">
-						<li><a style="color:#2D2F71" href="\">Home </a></li>
-						<li style="color:#2D2F71"><span> // </span><a style="color:#2D2F71"
-								href="{% url 'shop:shop' %}">shop </a></li>
-						<li style="color:#2D2F71"><span> // </span>{{single_product.category}}</li>
-						<li style="color:#2D2F71"><span> // </span>{{single_product.name}}</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="pages-title-text text-center">
+                    <h2 style="color:#2D2F71">{{single_product.name}}</h2>
+                    <ul class="text-left">
+                        <li><a style="color:#2D2F71" href="\">Home </a></li>
+                        <li style="color:#2D2F71"><span> // </span><a style="color:#2D2F71"
+                                href="{% url 'shop:shop' %}">shop </a></li>
+                        <li style="color:#2D2F71"><span> // </span>{{single_product.category}}</li>
+                        <li style="color:#2D2F71"><span> // </span>{{single_product.name}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- pages-title-end -->
 <!-- product-details-section-start -->
@@ -36,105 +36,530 @@
 									<div class="list-img">
 										<div class="product-img tab-content">
 											<div class="simpleLens-container tab-pane active fade in mainImage">
-												<a class="simpleLens-image"
-													data-lens-image="{{single_product.image.url}}" href="#"><img
-														style="border-radius:10px;" src="{{single_product.image.url}}"
-														alt="" class="simpleLens-big-image"></a>
+												<a class="simpleLens-image" data-lens-image="{{single_product.image.url}}" href="#">
+													<img style="border-radius:10px;" src="{{single_product.image.url}}" alt="" class="simpleLens-big-image">
+												</a>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="quick-thumb">
 									<ul class="product-slider thumb">
-										<li><a href="{{ single_product.image.url }}" data-lens-image="{{single_product.image.url}}" target="mainImage"><img style="width:85px; height:100px; border-radius:10px" src="{{single_product.image.url}}" alt="quick view" /></a></li>
+										<li>
+											<a href="{{ single_product.image.url }}" data-lens-image="{{single_product.image.url}}" target="mainImage">
+												<img style="width:85px; height:100px; border-radius:10px" src="{{single_product.image.url}}" alt="quick view" />
+											</a>
+										</li>
 										{% for i in product_gallery %}
-										<li><a href="{{i.image.url}}" data-lens-image="{{i.image.url}}" target="mainImage"><img  style="width:85px; height:100px; border-radius:10px" src="{{i.image.url}}" alt="quick view" /></a></li>
+										<li>
+											<a href="{{i.image.url}}" data-lens-image="{{i.image.url}}" target="mainImage">
+												<img style="width:85px; height:100px; border-radius:10px" src="{{i.image.url}}" alt="quick view" />
+											</a>
+										</li>
 										{% endfor %}
 									</ul>
 								</div>
 							</div>
 						</div>
+
+
+<!-- 
+						<div class="container mt-4">
+							<h2>Check Notification</h2>
+							<form id="check-notification-form">
+								<div class="form-group">
+									<label for="user_id">User ID:</label>
+									<input type="text" id="user_id" name="user_id" class="form-control" value="{{ user.id }}" readonly>
+								</div>
+								<div class="form-group">
+									<label for="product_id">Product ID:</label>
+									<input type="text" id="product_id" name="product_id" class="form-control" value="{{ single_product.id }}" readonly>
+								</div>
+							</form>
+							<h3 id="result-message">
+								
+								{% if have_notification %}
+								
+								<h1>yes</h1>								
+
+								
+								{% else %}
+								
+								<h1>nothing</h1>								
+								{% endif %}
+							
+							</h3>
+						</div>
+						 -->
+					
+						
+
+
+						
 						<div class="col-xs-12 col-sm-7 col-md-8">
 							<div class="quick-right">
 								<div style="border-radius:10px;" class="list-text">
-									<h3 style="color:#2D2F71">{{single_product.name}}</h3>
-                  <h5>{% if single_product.discount != 0.00 %}<del>${{single_product.discount}}</del>{% endif %}
-									<div class="ratting floatright">
-										<p style="font-size:1.5rem">( {{single_product.countReview}} Rating )</p>
-										<div style="float:right; font-size:1.5rem" class="rating-star">
-                      <span>
-                        <i class="fa fa-star{% if single_product.averageRating < 0.5 %}-o{% elif single_product.averageRating >= 0.5 and single_product.averageRating < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
-                        <i class="fa fa-star{% if single_product.averageRating < 1.5 %}-o{% elif single_product.averageRating >= 1.5 and single_product.averageRating < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
-                        <i class="fa fa-star{% if single_product.averageRating < 2.5 %}-o{% elif single_product.averageRating >= 2.5 and single_product.averageRating < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
-                        <i class="fa fa-star{% if single_product.averageRating < 3.5 %}-o{% elif single_product.averageRating >= 3.5 and single_product.averageRating < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
-                        <i class="fa fa-star{% if single_product.averageRating < 4.5 %}-o{% elif single_product.averageRating >= 4.5 and single_product.averageRating < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
-                    
-                      </span>
-                    </div>
-									</div>
-                  ${{single_product.price}}</h5>
-									<p>{{single_product.description}}.</p>
+									<div style="display: flex; justify-content: space-between; align-items: center;">
+										<h3 style="color:#2D2F71; margin: 0;">{{ single_product.name }}</h3>
+										<div style="display: flex; gap: 15px; align-items: center;">
+												<!-- Bell Icon -->
 
+
+
+												{% if have_notification %}
+								
+												<a style="color: #2D2F71; font-size: 24px;" id="update-icon">
+													<i class="fa fa-bell" aria-hidden="true"></i>
+												</a>		
+												{% else %}
+												
+												
+												<a style="color: #2D2F71; font-size: 24px;" id="create-icon">
+													<i class="fa fa-bell-o" aria-hidden="true"></i>
+												</a>												
+												{% endif %} 
+
+
+												<!-- Modal Popup -->
+												<div id="notification-modal" class="modal">
+													<div class="modal-content">
+														<span class="close">&times;</span>
+														<div id="notification-form-container">
+															<h2>Set Notification Preferences</h2>
+															<form id="notification-form" method="post" action="{% url 'shop:create_notification' %}">
+																{% csrf_token %}
+																<input type="hidden" name="user" value="{{ user.id }}">
+																<input type="hidden" name="product" value="{{ single_product.id }}">
+												
+																<div class="form-group mb-3">
+																	<label for="message">Custom Message (Optional):</label>
+																	<input type="text" id="message" name="message" 
+																		   placeholder="Enter a custom message for this notification" 
+																		   class="form-control">
+																	{% if form.message.errors %}
+																	<div class="text-danger">
+																		{{ form.message.errors }}
+																	</div>
+																	{% endif %}
+																</div>
+												
+																<div class="form-group mb-3">
+																	<label for="target_price">Notify me when price drops to:</label>
+																	<div class="price-input-wrapper">
+																		<span class="currency-symbol">$</span>
+																		<input type="text" id="target_price" name="target_price" class="form-control">
+																	</div>
+																	{% if form.target_price.errors %}
+																	<div class="text-danger">
+																		{{ form.target_price.errors }}
+																	</div>
+																	{% endif %}
+																</div>
+												
+																<div class="form-group form-check mb-3">
+																	<input type="checkbox" id="notify_on_sale" name="notify_on_sale" class="form-check-input">
+																	<label class="form-check-label" for="notify_on_sale">Notify on sale</label>
+																</div>
+												
+																<button type="submit" class="btn btn-primary w-100">Create Notification</button>
+															</form>
+												
+															{% if messages %}
+															<div>
+																{% for message in messages %}
+																<div class="alert alert-success">
+																	{{ message }}
+																</div>
+																{% endfor %}
+															</div>
+															{% endif %}
+														</div>
+													</div>
+												</div>
+												
+												<style>
+												.modal {
+													display: none;
+													position: fixed;
+													z-index: 1000;
+													left: 0;
+													top: 0;
+													width: 100%;
+													height: 100%;
+													background-color: rgba(0, 0, 0, 0.5);
+													backdrop-filter: blur(5px);
+												}
+												
+												.modal-content {
+													background-color: #fefefe;
+													margin: 15% auto;
+													padding: 2rem;
+													border-radius: 8px;
+													box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+													width: 90%;
+													max-width: 500px;
+													position: relative;
+												}
+												
+												.close {
+													position: absolute;
+													right: 1rem;
+													top: 0.5rem;
+													color: #aaa;
+													font-size: 28px;
+													font-weight: bold;
+													cursor: pointer;
+													transition: color 0.2s;
+												}
+												
+												.close:hover {
+													color: #333;
+												}
+												
+												.price-input-wrapper {
+													position: relative;
+													display: flex;
+													align-items: center;
+												}
+												
+												.currency-symbol {
+													position: absolute;
+													left: 1rem;
+													color: #495057;
+													z-index: 1;
+												}
+												
+												#target_price {
+													padding-left: 1.5rem;
+												}
+												
+												.form-group label {
+													margin-bottom: 0.5rem;
+													font-weight: 500;
+												}
+												
+												.alert {
+													margin-bottom: 1rem;
+													padding: 0.75rem 1rem;
+												}
+												
+												.btn-primary {
+													background-color: #2D2F71;
+													border-color: #2D2F71;
+													padding: 0.5rem 1rem;
+													transition: background-color 0.2s;
+												}
+												
+												.btn-primary:hover {
+													background-color: #242558;
+													border-color: #242558;
+												}
+												
+												@media (max-width: 576px) {
+													.modal-content {
+														margin: 10% auto;
+														width: 95%;
+														padding: 1.5rem;
+													}
+												}
+												</style>
+												
+												<script>
+												document.addEventListener('DOMContentLoaded', function() {
+													const modal = document.getElementById('notification-modal');
+													const bellIcon = document.getElementById('create-icon');
+													const closeBtn = document.querySelector('.close');
+												
+													// Open modal
+													bellIcon.addEventListener('click', function(e) {
+														e.preventDefault();
+														modal.style.display = 'block';
+														document.body.style.overflow = 'hidden'; // Prevent scrolling
+													});
+												
+													// Close modal
+													closeBtn.addEventListener('click', function() {
+														modal.style.display = 'none';
+														document.body.style.overflow = 'auto'; // Restore scrolling
+													});
+												
+													// Close on outside click
+													window.addEventListener('click', function(event) {
+														if (event.target === modal) {
+															modal.style.display = 'none';
+															document.body.style.overflow = 'auto';
+														}
+													});
+												});
+												</script>
+												
+
+
+												
+												{% if notification %}
+												<div id="update-notification-modal" class="modal">
+													<div class="modal-content">
+														<span class="close-update">&times;</span>
+														<div id="update-notification-form-container">
+															<h2>Update Notification Preferences</h2>
+															<form id="update-notification-form" method="post" action="{% url 'shop:update_notification' notification.id %}">
+																{% csrf_token %}
+																<div class="form-group mb-3">
+																	<label for="message">Custom Message (Optional):</label>
+																	<input type="text" id="message" name="message" class="form-control" value="{{ notification.message }}">
+																</div>
+																<div class="form-group mb-3">
+																	<label for="target_price">Notify me when price drops to:</label>
+																	<div class="price-input-wrapper">
+																		<span class="currency-symbol">$</span>
+																		<input type="text" id="target_price" name="target_price" class="form-control" value="{{ notification.target_price }}">
+																	</div>
+																</div>
+																<div class="form-group form-check mb-3">
+																	<input type="checkbox" id="notify_on_sale" name="notify_on_sale" class="form-check-input" {% if notification.notify_on_sale %}checked{% endif %}>
+																	<label class="form-check-label" for="notify_on_sale">Notify on sale</label>
+																</div>
+																<button type="submit" class="btn btn-primary w-100">Update Notification</button>
+															</form>
+															<form method="post" action="{% url 'shop:delete_notification' notification.id %}" class="mt-3">
+																{% csrf_token %}
+																<button type="submit" class="btn btn-danger w-100">Delete Notification</button>
+															</form>
+														</div>
+													</div>
+												</div>
+												
+												<style>
+													.modal {
+														display: none;
+														position: fixed;
+														z-index: 1000;
+														left: 0;
+														top: 0;
+														width: 100%;
+														height: 100%;
+														background-color: rgba(0, 0, 0, 0.5);
+														backdrop-filter: blur(5px);
+													}
+												
+													.modal-content {
+														background-color: #fefefe;
+														margin: 15% auto;
+														padding: 2rem;
+														border-radius: 8px;
+														box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+														width: 90%;
+														max-width: 500px;
+														position: relative;
+														animation: modalSlideIn 0.3s ease-out;
+													}
+												
+													@keyframes modalSlideIn {
+														from {
+															transform: translateY(-100px);
+															opacity: 0;
+														}
+														to {
+															transform: translateY(0);
+															opacity: 1;
+														}
+													}
+												
+													.close-update {
+														position: absolute;
+														right: 1rem;
+														top: 0.5rem;
+														color: #aaa;
+														font-size: 28px;
+														font-weight: bold;
+														cursor: pointer;
+														transition: color 0.2s;
+													}
+												
+													.close-update:hover {
+														color: #333;
+													}
+												
+													.price-input-wrapper {
+														position: relative;
+														display: flex;
+														align-items: center;
+													}
+												
+													.currency-symbol {
+														position: absolute;
+														left: 1rem;
+														color: #495057;
+														z-index: 1;
+													}
+												
+													#target_price {
+														padding-left: 1.5rem;
+													}
+												
+													.form-group label {
+														margin-bottom: 0.5rem;
+														font-weight: 500;
+													}
+												
+													.btn-primary {
+														background-color: #2D2F71;
+														border-color: #2D2F71;
+														padding: 0.5rem 1rem;
+														transition: background-color 0.2s;
+													}
+												
+													.btn-primary:hover {
+														background-color: #242558;
+														border-color: #242558;
+													}
+												
+													.btn-danger {
+														background-color: #dc3545;
+														border-color: #dc3545;
+													}
+												
+													.btn-danger:hover {
+														background-color: #c82333;
+														border-color: #bd2130;
+													}
+												
+													@media (max-width: 576px) {
+														.modal-content {
+															margin: 10% auto;
+															width: 95%;
+															padding: 1.5rem;
+														}
+													}
+												</style>
+												
+												<script>
+													document.addEventListener('DOMContentLoaded', function() {
+														const modal = document.getElementById('update-notification-modal');
+														const updateIcon = document.getElementById('update-icon');
+														const closeBtn = document.querySelector('.close-update');
+														const form = document.getElementById('update-notification-form');
+												
+														// Open modal
+														updateIcon.addEventListener('click', function(e) {
+															e.preventDefault();
+															modal.style.display = 'block';
+															document.body.style.overflow = 'hidden'; // Prevent scrolling
+														});
+												
+														// Close modal
+														closeBtn.addEventListener('click', function() {
+															modal.style.display = 'none';
+															document.body.style.overflow = 'auto'; // Restore scrolling
+														});
+												
+														// Close on outside click
+														window.addEventListener('click', function(event) {
+															if (event.target === modal) {
+																modal.style.display = 'none';
+																document.body.style.overflow = 'auto';
+															}
+														});
+														
+														// Format price input
+														const priceInput = document.getElementById('target_price');
+														priceInput.addEventListener('input', function(e) {
+															let value = e.target.value.replace(/[^\d.]/g, '');
+															if (value.split('.').length > 2) {
+																value = value.replace(/\.+$/, '');
+															}
+															e.target.value = value;
+														});
+													});
+												</script>
+												{% endif %}
+												
+
+
+
+
+
+
+
+
+
+
+
+
+											{% if request.user.is_authenticated %}
+											{% if in_wishlist %}
+											<a href="{% url 'shop:remove_from_wishlist' single_product.id %}" style="color: gold; font-size: 24px;">
+												<i class="fa fa-star" aria-hidden="true"></i>
+											</a>							
+											{% else %}
+											<a href="{% url 'shop:add_to_wishlist' single_product.id %}" style="color: #2D2F71; font-size: 24px;">
+												<i class="fa fa-star-o" aria-hidden="true"></i>
+											</a>							
+											{% endif %}
+										<!-- {% else %}
+											<a  style="color: #2D2F71; font-size: 24px;">
+												<i class="fa fa-star-o" aria-hidden="true"></i>
+											</a>
+										{% endif %} -->
+										</div>
+									</div>
+									<h5>
+										{% if single_product.discount != 0.00 %}
+											<del>${{single_product.discount}}</del>
+										{% endif %}
+										<div class="ratting floatright">
+											<p style="font-size:1.5rem">( {{single_product.countReview}} Rating )</p>
+											<div style="float:right; font-size:1.5rem" class="rating-star">
+												<span>
+													<i class="fa fa-star{% if single_product.averageRating < 0.5 %}-o{% elif single_product.averageRating >= 0.5 and single_product.averageRating < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+													<i class="fa fa-star{% if single_product.averageRating < 1.5 %}-o{% elif single_product.averageRating >= 1.5 and single_product.averageRating < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+													<i class="fa fa-star{% if single_product.averageRating < 2.5 %}-o{% elif single_product.averageRating >= 2.5 and single_product.averageRating < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+													<i class="fa fa-star{% if single_product.averageRating < 3.5 %}-o{% elif single_product.averageRating >= 3.5 and single_product.averageRating < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+													<i class="fa fa-star{% if single_product.averageRating < 4.5 %}-o{% elif single_product.averageRating >= 4.5 and single_product.averageRating < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+												</span>
+											</div>
+										</div>
+										${{single_product.price}}
+									</h5>
+									<p>{{single_product.description}}.</p>
 									<form action="{% url 'cart:add_cart' single_product.id %}" method="POST">
 										{% csrf_token %}
 										<div class="all-choose">
 											{% if single_product.variation_set.colors %}
-											<div style="margin-right:40px"
-												class="col-xs-12 col-sm-7 col-md-5  s-shoose">
-												<p style="font-size:20px; margin-bottom:5px">Color</p>
-												<select name="color" class="form-control" required>
-													<option value="" disabled selected>Select</option>
-
-													{% for x in single_product.variation_set.colors%}
-													<option value="{{x.variation_value | lower}}">
-														{{x.variation_value | capfirst}}</option>
-													{% endfor %}
-
-												</select>
-											</div>
+												<div style="margin-right:40px" class="col-xs-12 col-sm-7 col-md-5 s-shoose">
+													<p style="font-size:20px; margin-bottom:5px">Color</p>
+													<select name="color" class="form-control" required>
+														<option value="" disabled selected>Select</option>
+														{% for x in single_product.variation_set.colors %}
+															<option value="{{x.variation_value | lower}}">{{x.variation_value | capfirst}}</option>
+														{% endfor %}
+													</select>
+												</div>
 											{% endif %}
 											{% if single_product.variation_set.sizes %}
-											<div class="col-xs-12 col-sm-7 col-md-5 s-shoose ml-3">
-												<p style="font-size:20px; margin-bottom:5px">Size</p>
-												<select name="size" class="form-control" required>
-													<option value="" disabled selected>Select</option>
-
-													{% for x in single_product.variation_set.sizes%}
-													<option value="{{x.variation_value | lower}}">
-														{{x.variation_value | capfirst}}</option>
-													{% endfor %}
-
-												</select>
-											</div>
+												<div class="col-xs-12 col-sm-7 col-md-5 s-shoose ml-3">
+													<p style="font-size:20px; margin-bottom:5px">Size</p>
+													<select name="size" class="form-control" required>
+														<option value="" disabled selected>Select</option>
+														{% for x in single_product.variation_set.sizes %}
+															<option value="{{x.variation_value | lower}}">{{x.variation_value | capfirst}}</option>
+														{% endfor %}
+													</select>
+												</div>
 											{% endif %}
-											<br><br>
-											<br>
-											<br>
+											<br><br><br><br>
 											<div class="s-shoose">
 												<br>
 												{% if single_product.stock <= 0 %}
-												<div style="font-size:18px" class="alert alert-info text-center"
-													role="alert">
-													<b>This Product Not In Stock Now, Try Later</b>
-												</div>
+													<div style="font-size:18px" class="alert alert-info text-center" role="alert">
+														<b>This Product Not In Stock Now, Try Later</b>
+													</div>
 												{% else %}
-												<!--
-											{% if in_cart %}
-											<br><br>
-											<div style="font-size:18px; width:100%" class="container alert alert-success text-center" role="alert">
-											<b>This Product Already in Cart,&nbsp;&nbsp; <a href="{% url 'cart:cart' %}" style="color:#064420;text-decoration: underline;">Go To Cart<a></b>
-											</div>
-											{% else %}
-											<div class="list-btn floatright">
-												<button type="submit" class="btn btn-warning" style="background:#eb5e0b; font-size:18px">Add to cart <i class="mdi mdi-cart-outline"></i></button>
-											</div>
-											{% endif %}
-											-->
-												<div class="list-btn floatright">
-													<button type="submit" class="btn "
-														style="background:#2D2F71;color:#dedede; font-size:14px"><b>Add
-															to cart <i class="mdi mdi-cart-outline"></i></b></button>
-												</div>
+													<div class="list-btn floatright">
+														<button type="submit" class="btn" style="background:#2D2F71;color:#dedede; font-size:14px">
+															<b>Add to cart <i class="mdi mdi-cart-outline"></i></b>
+														</button>
+													</div>
 												{% endif %}
 												<br>
 											</div>
@@ -145,6 +570,20 @@
 						</div>
 					</div>
 				</div>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 				<!-- single-product item end -->
 				<!-- reviews area start -->
 				<div class="row">

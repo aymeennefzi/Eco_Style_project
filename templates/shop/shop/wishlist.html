@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>My Wishlist</h2>
+    <div class="row">
+        {% for item in items %}
+            <div class="col-sm-4">
+                <div class="list-img">
+                    <div class="product-img tab-content">
+                        <div class="simpleLens-container tab-pane active fade in mainImage">
+                            <a class="simpleLens-image" data-lens-image="{{ item.product.image.url }}" href="#">
+                                <img style="border-radius:10px;" src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="simpleLens-big-image">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <h5>
+                    {% if item.product.discount != 0.00 %}
+                        <del>${{ item.product.discount }}</del>
+                    {% endif %}
+                    <div class="ratting floatright">
+                        <p style="font-size:1.5rem">( {{ item.product.countReview }} Rating )</p>
+                        <div style="float:right; font-size:1.5rem" class="rating-star">
+                            <span>
+                                <i class="fa fa-star{% if item.product.averageRating < 0.5 %}-o{% elif item.product.averageRating >= 0.5 and item.product.averageRating < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+                                <i class="fa fa-star{% if item.product.averageRating < 1.5 %}-o{% elif item.product.averageRating >= 1.5 and item.product.averageRating < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+                                <i class="fa fa-star{% if item.product.averageRating < 2.5 %}-o{% elif item.product.averageRating >= 2.5 and item.product.averageRating < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+                                <i class="fa fa-star{% if item.product.averageRating < 3.5 %}-o{% elif item.product.averageRating >= 3.5 and item.product.averageRating < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+                                <i class="fa fa-star{% if item.product.averageRating < 4.5 %}-o{% elif item.product.averageRating >= 4.5 and item.product.averageRating < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
+                    ${{ item.product.price }}
+                </h5>
+                <p>{{ item.product.description }}.</p>
+                {% csrf_token %}
+                <div class="all-choose">
+                    {% if item.product.variation_set.colors %}
+                        <div style="margin-right:40px" class="col-xs-12 col-sm-7 col-md-5 s-shoose">
+                            <p style="font-size:20px; margin-bottom:5px">Color</p>
+                            <select name="color" class="form-control" required>
+                                <option value="" disabled selected>Select</option>
+                                {% for x in item.product.variation_set.colors %}
+                                    <option value="{{ x.variation_value | lower }}">{{ x.variation_value | capfirst }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% endif %}
+                    {% if item.product.variation_set.sizes %}
+                        <div class="col-xs-12 col-sm-7 col-md-5 s-shoose ml-3">
+                            <p style="font-size:20px; margin-bottom:5px">Size</p>
+                            <select name="size" class="form-control" required>
+                                <option value="" disabled selected>Select</option>
+                                {% for x in item.product.variation_set.sizes %}
+                                    <option value="{{ x.variation_value | lower }}">{{ x.variation_value | capfirst }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% endif %}
+                    <br><br><br><br>
+                   
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
